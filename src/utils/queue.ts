@@ -18,8 +18,9 @@ class Queue {
 
     public execute<T>(func: () => Promise<T>, key: string | number = null): Promise<T> {
         return new Promise((resolve, reject): void =>  {
-            this.jobs.push({key, func, running: false, resolve, reject});
-            this.executeNext();
+            func().then(resolve).catch(reject);
+        //     this.jobs.push({key, func, running: false, resolve, reject});
+        //     this.executeNext();
         });
     }
 
